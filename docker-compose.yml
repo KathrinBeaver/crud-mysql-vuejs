@@ -1,0 +1,25 @@
+version: '3'
+services:
+  test-mysql:
+    container_name: test-mysql
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_DATABASE: products_db
+      MYSQL_ROOT_PASSWORD: qwe123
+      MYSQL_ROOT_HOST: '%'
+    ports:
+    - "3306:3306"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    restart: always
+
+  crud-mysql-vuejs:
+    build: .
+    volumes:
+    - .:/app
+    - ~/.m2:/root/.m2
+    working_dir: /app
+    ports:
+    - 8080:8080
+    command: mvn clean spring-boot:run
+    depends_on:
+    - test-mysql
