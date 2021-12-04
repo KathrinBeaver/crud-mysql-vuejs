@@ -8,4 +8,4 @@ docker-compose up
 
 # БД products_db доступна для работы
 
-# Запустить приложение
+# Запустить приложение: Spring Boot + freemarker
